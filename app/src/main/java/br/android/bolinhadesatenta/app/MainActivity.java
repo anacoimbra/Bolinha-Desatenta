@@ -16,15 +16,12 @@ import android.widget.TextView;
 
 import com.orbotix.ConvenienceRobot;
 import com.orbotix.Sphero;
-import com.orbotix.calibration.api.CalibrationEventListener;
-import com.orbotix.calibration.api.CalibrationImageButtonView;
 import com.orbotix.classic.DiscoveryAgentClassic;
 import com.orbotix.common.DiscoveryAgent;
 import com.orbotix.common.DiscoveryAgentEventListener;
 import com.orbotix.common.DiscoveryException;
 import com.orbotix.common.Robot;
 import com.orbotix.common.RobotChangedStateListener;
-import com.orbotix.calibration.api.CalibrationView;
 
 import java.util.List;
 
