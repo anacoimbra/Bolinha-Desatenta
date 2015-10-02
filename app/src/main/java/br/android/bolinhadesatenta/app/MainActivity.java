@@ -147,7 +147,7 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         });
     }
 
-    public void goTop(View view){
+    public void goUp(View view){
         _connectedRobot.drive(0, 2);
         try {
             wait(500);
@@ -171,7 +171,7 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         _connectedRobot.stop();
     }
 
-    public void goBottom(View view){
+    public void goDown(View view){
         _connectedRobot.drive(180, 2);
         try {
             wait(500);
@@ -303,6 +303,14 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
             // You do need to handle the discovery exception. This can occur in cases where the user has
             // Bluetooth off, or when the discovery cannot be started for some other reason.
             _currentDiscoveryAgent.startDiscovery(this);
+            this.findViewById(R.id.baixo).setEnabled(true);
+            this.findViewById(R.id.cima).setEnabled(true);
+            this.findViewById(R.id.esquerda).setEnabled(true);
+            this.findViewById(R.id.direita).setEnabled(true);
+            this.findViewById(R.id.rosa).setEnabled(true);
+            this.findViewById(R.id.roxo).setEnabled(true);
+            this.findViewById(R.id.laranja).setEnabled(true);
+            this.findViewById(R.id.amarelo).setEnabled(true);
             Log.d("ACHOU", "Encontrado sphero");
         } catch (DiscoveryException e) {
             Log.e("ERRO", "Could not start discovery. Reason: " + e.getMessage());

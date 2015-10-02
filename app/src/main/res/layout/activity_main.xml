@@ -26,7 +26,8 @@
             android:src="@mipmap/ic_seta"
             android:rotation="180"
                 android:background="@android:color/transparent"
-                android:onClick="goLeft" />
+                android:onClick="goLeft"
+                android:enabled="false"/>
 
 
             <LinearLayout
@@ -40,7 +41,8 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_seta" android:rotation="270"
                     android:background="@android:color/transparent"
-                    android:onClick="goTop" />
+                    android:onClick="goUp"
+                    android:enabled="false"/>
 
                 <ImageButton
                     android:visibility="invisible"
@@ -54,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_seta"
                     android:rotation="90" android:background="@android:color/transparent"
-                    android:onClick="goBottom" />
+                    android:onClick="goDown"
+                    android:enabled="false"/>
             </LinearLayout>
             <!-- Direita -->
             <ImageButton
@@ -62,7 +65,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_seta" android:background="@android:color/transparent"
-                android:onClick="goRight" />
+                android:onClick="goRight"
+                android:enabled="false"/>
         </LinearLayout>
 
     <RelativeLayout
@@ -82,13 +86,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/yellow"
-                    android:onClick="setYellow" />
+                    android:onClick="setYellow"
+                    android:enabled="false"
+                    android:id="@+id/amarelo"/>
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/pink"
                     android:singleLine="false"
-                    android:onClick="setPink" />
+                    android:onClick="setPink"
+                    android:enabled="false"
+                    android:id="@+id/rosa"/>
 
             </LinearLayout>
 
@@ -99,13 +107,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/orange"
-                    android:onClick="setOrange" />
+                    android:onClick="setOrange"
+                    android:enabled="false"
+                    android:id="@+id/laranja"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/purple"
-                    android:onClick="setPurple" />
+                    android:onClick="setPurple"
+                    android:enabled="false"
+                    android:id="@+id/roxo"/>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
