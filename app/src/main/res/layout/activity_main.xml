@@ -25,7 +25,8 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_seta"
             android:rotation="180"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"
+                android:onClick="goLeft" />
 
 
             <LinearLayout
@@ -38,7 +39,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_seta" android:rotation="270"
-                    android:background="@android:color/transparent"/>
+                    android:background="@android:color/transparent"
+                    android:onClick="goTop" />
 
                 <ImageButton
                     android:visibility="invisible"
@@ -51,14 +53,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_seta"
-                    android:rotation="90" android:background="@android:color/transparent"/>
+                    android:rotation="90" android:background="@android:color/transparent"
+                    android:onClick="goBottom" />
             </LinearLayout>
             <!-- Direita -->
             <ImageButton
                 android:id="@+id/direita"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_seta" android:background="@android:color/transparent"/>
+                android:src="@mipmap/ic_seta" android:background="@android:color/transparent"
+                android:onClick="goRight" />
         </LinearLayout>
 
     <RelativeLayout
@@ -77,11 +81,14 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#FFEB3B"/>
+                    android:background="@color/yellow"
+                    android:onClick="setYellow" />
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#F8BBD0"/>
+                    android:background="@color/pink"
+                    android:singleLine="false"
+                    android:onClick="setPink" />
 
             </LinearLayout>
 
@@ -91,12 +98,14 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#FF9800"/>
+                    android:background="@color/orange"
+                    android:onClick="setOrange" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#6A1B9A"/>
+                    android:background="@color/purple"
+                    android:onClick="setPurple" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

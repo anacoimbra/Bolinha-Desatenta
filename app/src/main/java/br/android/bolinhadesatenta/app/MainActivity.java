@@ -4,6 +4,7 @@ import br.android.bolinhadesatenta.app.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +35,7 @@ import java.util.List;
  */
 public class MainActivity extends Activity implements DiscoveryAgentEventListener,
         RobotChangedStateListener {
+
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -145,6 +147,62 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         });
     }
 
+    public void goTop(View view){
+        _connectedRobot.drive(0, 2);
+        try {
+            wait(500);
+        }catch (Exception ignore){}
+        _connectedRobot.stop();
+    }
+
+    public void goRight(View view){
+        _connectedRobot.drive(90, 2);
+        try {
+            wait(500);
+        }catch (Exception ignore){}
+        _connectedRobot.stop();
+    }
+
+    public void goLeft(View view){
+        _connectedRobot.drive(270, 2);
+        try {
+            wait(500);
+        }catch (Exception ignore){}
+        _connectedRobot.stop();
+    }
+
+    public void goBottom(View view){
+        _connectedRobot.drive(180, 2);
+        try {
+            wait(500);
+        }catch (Exception ignore){}
+        _connectedRobot.stop();
+    }
+
+    public void setYellow(View view){
+        _connectedRobot.setLed(Color.red(R.color.yellow), Color.green(R.color.yellow), Color.blue(R.color.yellow));
+    }
+
+    public void setPink(View view){
+        _connectedRobot.setLed(Color.red(R.color.pink), Color.green(R.color.pink), Color.blue(R.color.pink));
+    }
+
+    public void setPurple(View view){
+        _connectedRobot.setLed(Color.red(R.color.purple), Color.green(R.color.purple), Color.blue(R.color.purple));
+    }
+
+    public void setOrange(View view){
+        _connectedRobot.setLed(Color.red(R.color.orange), Color.green(R.color.orange), Color.blue(R.color.orange));
+    }
+
+    public void setInitialColor(View view){
+        this.setInitialColor();
+    }
+
+    private void setInitialColor(){
+        _connectedRobot.setLed(Color.red(R.color.initial), Color.green(R.color.initial), Color.blue(R.color.initial));
+    }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -219,8 +277,7 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
 
                 _connectedRobot.setZeroHeading();
 
-                // Finally for visual feedback let's turn the robot green saying that it's been connected
-                _connectedRobot.setLed(1f, 1f, 1f);
+                this.setInitialColor();
 
                 break;
             case Disconnected:

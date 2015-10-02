@@ -2,4 +2,15 @@
 
     <color name="black_overlay">#66000000</color>
 
+    <color name="pink">#F8BBD0</color>
+
+    <color name="yellow">#FFEB3B</color>
+
+    <color name="orange">#FF9800</color>
+
+    <color name="purple">#6A1B9A</color>
+
+    <color name="initial">#FFFFFF</color>
+
+
 </resources>
