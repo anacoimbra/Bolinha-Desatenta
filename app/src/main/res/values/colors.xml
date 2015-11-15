@@ -4,6 +4,12 @@
 
     <color name="pink">#F8BBD0</color>
 
+    <color name="background">#E7EAED</color>
+
+    <color name="alert_text">#F84647</color>
+
+    <color name="normal_text">#008E93</color>
+
     <color name="yellow">#FFEB3B</color>
 
     <color name="orange">#FF9800</color>

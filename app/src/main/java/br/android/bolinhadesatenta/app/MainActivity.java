@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -68,11 +67,30 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
 
     private ConvenienceRobot _connectedRobot;
 
+    private View mDecorView;
+
     ImageButton txtEsq;
+
+    // This snippet hides the system bars.
+    private void hideSystemUI() {
+        // Set the IMMERSIVE flag.
+        // Set the content to appear under the system bars so that the content
+        // doesn't resize when the system bars hide and show.
+        mDecorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mDecorView = getWindow().getDecorView();
+        this.hideSystemUI();
 
         setContentView(R.layout.activity_main);
 
@@ -129,7 +147,7 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
             }
         });
 
-        txtEsq = (ImageButton) findViewById(R.id.esquerda);
+        txtEsq = (ImageButton) findViewById(R.id.leftBtn);
 
         _currentDiscoveryAgent = DiscoveryAgentClassic.getInstance();
         startDiscovery();
@@ -303,14 +321,14 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
             // You do need to handle the discovery exception. This can occur in cases where the user has
             // Bluetooth off, or when the discovery cannot be started for some other reason.
             _currentDiscoveryAgent.startDiscovery(this);
-            this.findViewById(R.id.baixo).setEnabled(true);
-            this.findViewById(R.id.cima).setEnabled(true);
-            this.findViewById(R.id.esquerda).setEnabled(true);
-            this.findViewById(R.id.direita).setEnabled(true);
-            this.findViewById(R.id.rosa).setEnabled(true);
-            this.findViewById(R.id.roxo).setEnabled(true);
-            this.findViewById(R.id.laranja).setEnabled(true);
-            this.findViewById(R.id.amarelo).setEnabled(true);
+            this.findViewById(R.id.downBtn).setEnabled(true);
+            this.findViewById(R.id.upBtn).setEnabled(true);
+            this.findViewById(R.id.leftBtn).setEnabled(true);
+            this.findViewById(R.id.rightBtn).setEnabled(true);
+//            this.findViewById(R.id.rosa).setEnabled(true);
+//            this.findViewById(R.id.roxo).setEnabled(true);
+//            this.findViewById(R.id.laranja).setEnabled(true);
+//            this.findViewById(R.id.amarelo).setEnabled(true);
             Log.d("ACHOU", "Encontrado sphero");
         } catch (DiscoveryException e) {
             Log.e("ERRO", "Could not start discovery. Reason: " + e.getMessage());
