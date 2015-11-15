@@ -4,6 +4,7 @@ import br.android.bolinhadesatenta.app.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.orbotix.ConvenienceRobot;
 import com.orbotix.Sphero;
@@ -139,6 +141,17 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
                     }
                 });
 
+        this.findViewById(R.id.downBtn).setEnabled(false);
+        this.findViewById(R.id.upBtn).setEnabled(false);
+        this.findViewById(R.id.leftBtn).setEnabled(false);
+        this.findViewById(R.id.rightBtn).setEnabled(false);
+        this.findViewById(R.id.pinkBtn).setEnabled(false);
+        this.findViewById(R.id.blueBtn).setEnabled(false);
+        this.findViewById(R.id.orangeBtn).setEnabled(false);
+        this.findViewById(R.id.greenBtn).setEnabled(false);
+        this.findViewById(R.id.blackBtn).setEnabled(false);
+        this.findViewById(R.id.redBtn).setEnabled(false);
+
         // Set up the user interaction to manually show or hide the system UI.
         contentView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,70 +160,91 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
             }
         });
 
-        txtEsq = (ImageButton) findViewById(R.id.leftBtn);
-
         _currentDiscoveryAgent = DiscoveryAgentClassic.getInstance();
         startDiscovery();
-
-        txtEsq.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                _connectedRobot.drive(0, 2);
-//                try {
-//                    wait(500);
-//                }catch (Exception ignore){}
-                _connectedRobot.stop();
-                return false;
-            }
-        });
     }
 
     public void goUp(View view){
-        _connectedRobot.drive(0, 2);
         try {
-            wait(500);
-        }catch (Exception ignore){}
-        _connectedRobot.stop();
+            _connectedRobot.drive(0, 2);
+            try {
+                wait(500);
+            } catch (Exception ignore) {
+            }
+            _connectedRobot.stop();
+        }catch (Exception e){
+            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void goRight(View view){
+        try{
         _connectedRobot.drive(90, 2);
         try {
             wait(500);
         }catch (Exception ignore){}
         _connectedRobot.stop();
+        }catch (Exception e){
+            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void goLeft(View view){
-        _connectedRobot.drive(270, 2);
         try {
-            wait(500);
-        }catch (Exception ignore){}
-        _connectedRobot.stop();
+            _connectedRobot.drive(270, 2);
+            try {
+                wait(500);
+            } catch (Exception ignore) {
+            }
+            _connectedRobot.stop();
+        }catch (Exception e){
+            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void goDown(View view){
-        _connectedRobot.drive(180, 2);
         try {
-            wait(500);
-        }catch (Exception ignore){}
-        _connectedRobot.stop();
+            _connectedRobot.drive(180, 2);
+            try {
+                wait(500);
+            } catch (Exception ignore) {
+            }
+            _connectedRobot.stop();
+        }catch (Exception e){
+            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void setYellow(View view){
-        _connectedRobot.setLed(Color.red(R.color.yellow), Color.green(R.color.yellow), Color.blue(R.color.yellow));
+        try {
+            _connectedRobot.setLed(1f, 0.922f, 0.231f);
+        }catch (Exception e){
+            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void setPink(View view){
-        _connectedRobot.setLed(Color.red(R.color.pink), Color.green(R.color.pink), Color.blue(R.color.pink));
+        try {
+            _connectedRobot.setLed(1f, 0.804f, 0.824f);
+        }catch (Exception e){
+            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void setPurple(View view){
-        _connectedRobot.setLed(Color.red(R.color.purple), Color.green(R.color.purple), Color.blue(R.color.purple));
+        try {
+            _connectedRobot.setLed(0.612f, 0.153f, 0.69f);
+        }catch (Exception e){
+            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void setOrange(View view){
-        _connectedRobot.setLed(Color.red(R.color.orange), Color.green(R.color.orange), Color.blue(R.color.orange));
+        try {
+            _connectedRobot.setLed(1f, 0.596f, 0f);
+        }catch (Exception e){
+            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void setInitialColor(View view){
@@ -218,7 +252,11 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
     }
 
     private void setInitialColor(){
-        _connectedRobot.setLed(Color.red(R.color.initial), Color.green(R.color.initial), Color.blue(R.color.initial));
+        try {
+            _connectedRobot.setLed(1f,1f,1f);
+        }catch (Exception e){
+            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -291,6 +329,16 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
                 // common functionality related to the individual robots. You can always of course use the
                 // Robot#sendCommand() method, but Ollie#drive() reads a bit better.
                 _connectedRobot = new Sphero(robot);
+                this.findViewById(R.id.downBtn).setEnabled(true);
+                this.findViewById(R.id.upBtn).setEnabled(true);
+                this.findViewById(R.id.leftBtn).setEnabled(true);
+                this.findViewById(R.id.rightBtn).setEnabled(true);
+                this.findViewById(R.id.pinkBtn).setEnabled(true);
+                this.findViewById(R.id.blueBtn).setEnabled(true);
+                this.findViewById(R.id.orangeBtn).setEnabled(true);
+                this.findViewById(R.id.greenBtn).setEnabled(true);
+                this.findViewById(R.id.blackBtn).setEnabled(true);
+                this.findViewById(R.id.redBtn).setEnabled(true);
                 Log.d("OK", "Sphero conectado");
 
                 _connectedRobot.setZeroHeading();
@@ -321,14 +369,7 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
             // You do need to handle the discovery exception. This can occur in cases where the user has
             // Bluetooth off, or when the discovery cannot be started for some other reason.
             _currentDiscoveryAgent.startDiscovery(this);
-            this.findViewById(R.id.downBtn).setEnabled(true);
-            this.findViewById(R.id.upBtn).setEnabled(true);
-            this.findViewById(R.id.leftBtn).setEnabled(true);
-            this.findViewById(R.id.rightBtn).setEnabled(true);
-//            this.findViewById(R.id.rosa).setEnabled(true);
-//            this.findViewById(R.id.roxo).setEnabled(true);
-//            this.findViewById(R.id.laranja).setEnabled(true);
-//            this.findViewById(R.id.amarelo).setEnabled(true);
+
             Log.d("ACHOU", "Encontrado sphero");
         } catch (DiscoveryException e) {
             Log.e("ERRO", "Could not start discovery. Reason: " + e.getMessage());

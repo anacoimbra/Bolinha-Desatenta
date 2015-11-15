@@ -136,7 +136,7 @@
                             <ImageButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/imageButton"
+                                android:id="@+id/greenBtn"
                                 android:background="@android:color/transparent"
                                 android:src="@mipmap/ic_green_button"
                                 android:layout_marginLeft="2dp"
@@ -145,7 +145,7 @@
                             <ImageButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/imageButton2"
+                                android:id="@+id/pinkBtn"
                                 android:background="@android:color/transparent"
                                 android:src="@mipmap/ic_pink_button"
                                 android:layout_marginLeft="2dp"
@@ -154,7 +154,7 @@
                             <ImageButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/imageButton3"
+                                android:id="@+id/blueBtn"
                                 android:background="@android:color/transparent"
                                 android:src="@mipmap/ic_blue_button"
                                 android:layout_marginLeft="2dp"
@@ -186,7 +186,7 @@
                             <ImageButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/blueBtn"
+                                android:id="@+id/redBtn"
                                 android:background="@android:color/transparent"
                                 android:src="@mipmap/ic_red_button"
                                 android:layout_marginLeft="2dp"
