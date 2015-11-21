@@ -164,57 +164,6 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         startDiscovery();
     }
 
-    public void goUp(View view){
-        try {
-            _connectedRobot.drive(0, 2);
-            try {
-                wait(500);
-            } catch (Exception ignore) {
-            }
-            _connectedRobot.stop();
-        }catch (Exception e){
-            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void goRight(View view){
-        try{
-        _connectedRobot.drive(90, 2);
-        try {
-            wait(500);
-        }catch (Exception ignore){}
-        _connectedRobot.stop();
-        }catch (Exception e){
-            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void goLeft(View view){
-        try {
-            _connectedRobot.drive(270, 2);
-            try {
-                wait(500);
-            } catch (Exception ignore) {
-            }
-            _connectedRobot.stop();
-        }catch (Exception e){
-            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void goDown(View view){
-        try {
-            _connectedRobot.drive(180, 2);
-            try {
-                wait(500);
-            } catch (Exception ignore) {
-            }
-            _connectedRobot.stop();
-        }catch (Exception e){
-            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
-        }
-    }
-
     public void setYellow(View view){
         try {
             _connectedRobot.setLed(1f, 0.922f, 0.231f);
