@@ -5,8 +5,6 @@ import br.android.bolinhadesatenta.app.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Dialog;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +24,7 @@ import com.orbotix.common.DiscoveryException;
 import com.orbotix.common.Robot;
 import com.orbotix.common.RobotChangedStateListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -78,8 +77,6 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
 
     private ImageButton up, down, right, left, black, pink, blue, green, red, orange;
 
-    ImageButton txtEsq;
-
     // This snippet hides the system bars.
     private void hideSystemUI() {
         // Set the IMMERSIVE flag.
@@ -103,7 +100,6 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
 
         setContentView(R.layout.activity_main);
 
-//        final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
 
         up = (ImageButton)findViewById(R.id.upBtn);
@@ -359,17 +355,64 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
     }
 
     private void newTurn() {
+        // TODO resetar label com mensagem apropriada. depois dos comandos executados, trocar label novamente
+        disableButtons(); // lock buttons
+        setInitialColor();
         game.newTurn();
-        while(game.isActive) {System.out.println("Rodando jogo");} //wait while ball is running
 
-        update(game, _connectedRobot);
+        ArrayList<Integer> commands = game.getExecutedCommands();
+
+        for (Integer command : commands) {
+            if (command == Game.COMMAND_LEFT) {
+                game.addUserCommand(Game.COMMAND_LEFT);
+                moveLeft();
+            }
+            else if (command == Game.COMMAND_RIGHT) {
+                game.addUserCommand(Game.COMMAND_RIGHT);
+                moveRight();
+            }
+            else if (command == Game.COMMAND_UP) {
+                game.addUserCommand(Game.COMMAND_UP);
+                moveUp();
+            }
+            else if (command == Game.COMMAND_DOWN) {
+                game.addUserCommand(Game.COMMAND_DOWN);
+                moveDown();
+            }
+            else if (command == Game.COMMAND_PINK) {
+                game.addUserCommand(Game.COMMAND_PINK);
+                // TODO set sphero led
+            }
+            else if (command == Game.COMMAND_YELLOW) {
+                game.addUserCommand(Game.COMMAND_YELLOW);
+                // TODO set sphero led
+            }
+            else if (command == Game.COMMAND_BLACK) {
+                game.addUserCommand(Game.COMMAND_BLACK);
+                // TODO set sphero led
+            }
+            else if (command == Game.COMMAND_GREEN) {
+                game.addUserCommand(Game.COMMAND_GREEN);
+                // TODO set sphero led
+            }
+            else if (command == Game.COMMAND_BLUE) {
+                game.addUserCommand(Game.COMMAND_BLUE);
+                // TODO set sphero led
+            }
+            else if (command == Game.COMMAND_RED) {
+                game.addUserCommand(Game.COMMAND_RED);
+                // TODO set sphero led
+            }
+        }
+
+        enableButtons(); // unlock buttons
     }
 
     private void startNewGame() {
         TextView l = (TextView) findViewById(R.id.feedback_message);
         l.setTextColor(getResources().getColor(R.color.ok));
         l.setText(R.string.waiting_sphero);
-        game = new Game(_connectedRobot, this, Game.DIFFICULTY_NORMAL, this);
+        game = new Game(Game.DIFFICULTY_NORMAL, this);
         newTurn();
     }
 
@@ -395,14 +438,116 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         }
     }
 
-    private void releaseButtons() {
-        enableButtons();
-    }
-
     @Override
     public void update(Observable observable, Object data) {
-        releaseButtons();
-        TextView l = (TextView) findViewById(R.id.feedback_message);
-        l.setText(R.string.repeat_movements);
+        // TODO recebe pontuação no object data e acrescenta no label de pontuação
+        newTurn();
+    }
+
+    public void moveUp(){
+        try {
+            _connectedRobot.drive(0, 2);
+            try {
+                wait(500);
+            } catch (Exception ignore) {
+            }
+            _connectedRobot.stop();
+        }catch (Exception e){
+            Toast.makeText(this, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void moveRight(){
+        try{
+            _connectedRobot.drive(90, 2);
+            try {
+                wait(500);
+            }catch (Exception ignore){}
+            _connectedRobot.stop();
+        }catch (Exception e){
+            Toast.makeText(this, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void moveLeft(){
+        try {
+            _connectedRobot.drive(270, 2);
+            try {
+                wait(500);
+            } catch (Exception ignore) {
+            }
+            _connectedRobot.stop();
+        }catch (Exception e){
+            Toast.makeText(this, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void moveDown(){
+        try {
+            _connectedRobot.drive(180, 2);
+            try {
+                wait(500);
+            } catch (Exception ignore) {
+            }
+            _connectedRobot.stop();
+        }catch (Exception e){
+            Toast.makeText(this, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setInitialColor(){
+        try {
+            _connectedRobot.setLed(1f,1f,1f);
+        }catch (Exception e){
+            Toast.makeText(this, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setPink(){
+        try {
+            _connectedRobot.setLed(1f, 0.804f, 0.824f);
+        }catch (Exception e){
+            Toast.makeText(this, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setOrange(){
+        try {
+            _connectedRobot.setLed(1f, 0.596f, 0f);
+        }catch (Exception e){
+            Toast.makeText(this, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setBlack(){
+        try {
+            _connectedRobot.setLed(0f, 0f, 0f);
+        }catch (Exception e){
+            Toast.makeText(this, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setRed(){
+        try {
+            _connectedRobot.setLed(1f, 0f, 0f);
+        }catch (Exception e){
+            Toast.makeText(this, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setBlue(){
+        try {
+            _connectedRobot.setLed(0f, 0f, 1f);
+        }catch (Exception e){
+            Toast.makeText(this, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setGreen(){
+        try {
+            _connectedRobot.setLed(0f, 1f, 0f);
+        }catch (Exception e){
+            Toast.makeText(this, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
     }
 }
