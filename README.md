@@ -2,13 +2,13 @@
 #####Bolinha Desatenta é um aplicativo para [Android](http://www.android.com/) conectado a uma [Sphero Robot](http://www.sphero.com/sphero) que tem como objetivo ser um jogo divertido e, ao mesmo tempo, ajude pessoas com [TDAH](http://www.tdah.org.br/).
 
 ##Configurações Iniciais
-```
+```java
 public class MainActivity extends Activity implements DiscoveryAgentEventListener, RobotChangedStateListener
 ```
 ###Implementação dos métodos
 Como a classe Activity implementa os Listeners da Sphero, é preciso implementar seus métodos abstratos:
 ####Buscar Robôs disponíveis
-```
+```java
 private void startDiscovery() {
     try {
         _currentDiscoveryAgent.addDiscoveryListener(this);
@@ -28,7 +28,7 @@ Se for encontrado pelo menos um robô, ele estará alocado na variável **list**
 *_currentDiscoveryAgent instanceof DiscoveryAgentClassic* verifica se o agente de descoberta encontrou um robô do tipo Sphero (Existem tipo Sphero e tipo Ollie)
 
 *connect()* faz a conexão da primeira instância de Sphero conectada.
-```
+```java
 @Override
     public void handleRobotsAvailable(List<Robot> list) {
         if (_currentDiscoveryAgent instanceof DiscoveryAgentClassic) {
@@ -45,7 +45,7 @@ Como já foi encontrado pelo menos um robô, a descoberta é desligada, pois nã
 Após conectado com a Sphero, podemos iniciar o jogo. Chamamos então *startNewGame();*
 
 Se acontecer algum problema de conexão, o estado da Sphero será **Desconectado**.
-```
+```java
 @Override
 public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationType robotChangedStateNotificationType) {
     switch (robotChangedStateNotificationType) {
@@ -73,16 +73,16 @@ public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationTy
 Implementações dos métodos do SDK Sphero para a interação.
 ####Mudança de Cor
 *x,y,z* devem ser substituidos por valores em pontos flutuantes de 0 a 1 para *vermelho, verde e azul* respectivamente
-```
+```java
 _connectedRobot.setLed(x,y,y);
 ```
 ####Movimentação
 *a,b* correspondem, respectivamente, a rotação que a Sphero deve ter em relação a sua calibração feita anteriormente e sua velocidade.
-```
+```java
 _connectedRobot.drive(a, b);
 ```
 Se não for feito um tratamento, o robô deslocará por uma distância muito longa. Para resolver este problema, utilizamos um método do java *wait(s);* que faz uma espera de s milisegundos e depois paramos a Sphero com o seguinte comando:
-```
+```java
 _connectedRobot.stop();
 ```
 
