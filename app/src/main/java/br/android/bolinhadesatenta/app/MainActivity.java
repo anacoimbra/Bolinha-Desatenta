@@ -277,16 +277,17 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         }
     }
 
+    private void newTurn() {
+        game.newTurn();
+        while(game.isActive) {System.out.println("Rodando jogo");} //wait while ball is running
+    }
+
     private void startNewGame() {
-        Log.d("uhul", "aff");
         TextView l = (TextView) findViewById(R.id.feedback_message);
         l.setTextColor(getResources().getColor(R.color.ok));
         l.setText(R.string.waiting_sphero);
         game = new Game(_connectedRobot, this, Game.DIFFICULTY_NORMAL, this);
-        game.newTurn();
-        System.out.println("Iniciar jogo");
-        while(game.isActive) {System.out.println("Rodando jogo");} //wait while ball is running
-        enableButtons();
+        newTurn();
     }
 
     private void startDiscovery() {
@@ -311,12 +312,14 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         }
     }
 
-    public void releaseButtons() {
-
+    private void releaseButtons() {
+        enableButtons();
     }
 
     @Override
     public void update(Observable observable, Object data) {
         releaseButtons();
+        TextView l = (TextView) findViewById(R.id.feedback_message);
+        l.setText(R.string.repeat_movements);
     }
 }
