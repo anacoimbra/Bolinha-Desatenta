@@ -76,6 +76,8 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
 
     private Game game;
 
+    private ImageButton up, down, right, left, black, pink, blue, green, red, orange;
+
     private int movementsLeft;
 
     ImageButton txtEsq;
@@ -105,6 +107,117 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
 
 //        final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
+
+        up = (ImageButton)findViewById(R.id.upBtn);
+        down = (ImageButton)findViewById(R.id.downBtn);
+        right = (ImageButton)findViewById(R.id.rightBtn);
+        left = (ImageButton)findViewById(R.id.leftBtn);
+        pink = (ImageButton)findViewById(R.id.pinkBtn);
+        black = (ImageButton)findViewById(R.id.blackBtn);
+        green = (ImageButton)findViewById(R.id.greenBtn);
+        red = (ImageButton)findViewById(R.id.redBtn);
+        blue = (ImageButton)findViewById(R.id.blueBtn);
+        orange = (ImageButton)findViewById(R.id.orangeBtn);
+
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(game.verifyCommand(0, 2))
+                {
+                    Log.e("ACERTOU", "");
+                }
+            }
+        });
+
+        down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(game.verifyCommand(0, 3))
+                {
+                    Log.e("ACERTOU", "");
+                }
+            }
+        });
+
+        right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(game.verifyCommand(0, 1))
+                {
+                    Log.e("ACERTOU", "");
+                }
+            }
+        });
+
+        left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(game.verifyCommand(0, 0))
+                {
+                    Log.e("ACERTOU", "");
+                }
+            }
+        });
+
+        pink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(game.verifyCommand(0, 4))
+                {
+                    Log.e("ACERTOU", "");
+                }
+            }
+        });
+
+        orange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(game.verifyCommand(0, 5))
+                {
+                    Log.e("ACERTOU", "");
+                }
+            }
+        });
+
+        black.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(game.verifyCommand(0, 6))
+                {
+                    Log.e("ACERTOU", "");
+                }
+            }
+        });
+
+        green.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(game.verifyCommand(0, 7))
+                {
+                    Log.e("ACERTOU", "");
+                }
+            }
+        });
+
+        blue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(game.verifyCommand(0, 8))
+                {
+                    Log.e("ACERTOU", "");
+                }
+            }
+        });
+
+        red.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(game.verifyCommand(0, 9))
+                {
+                    Log.e("ACERTOU", "");
+                }
+            }
+        });
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.

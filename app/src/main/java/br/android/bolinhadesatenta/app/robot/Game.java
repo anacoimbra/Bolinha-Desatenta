@@ -334,4 +334,9 @@ public class Game extends Observable {
             Toast.makeText(context, "Sphero not connected", Toast.LENGTH_LONG).show();
         }
     }
+
+    public boolean verifyCommand(int i, int command)
+    {
+        return (executedCommands.get(i) == command);
+    }
 }
