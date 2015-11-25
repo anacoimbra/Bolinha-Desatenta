@@ -93,9 +93,9 @@ public class Game extends Observable {
     }
 
     private void checkPoints() {
-        // comparar comandos do usuário com os aleatórios
-        // calcular pontuação
-        // enviar para os observerst
+        // TODO comparar comandos do usuário com os aleatórios
+        // TODO calcular pontuação
+        // TODO enviar para os observers
         notifyObservers();
     }
 
