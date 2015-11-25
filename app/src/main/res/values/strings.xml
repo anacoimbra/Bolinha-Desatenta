@@ -4,5 +4,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="searching_robot">Searching robot...</string>
+    <string name="waiting_sphero">Watch carefully the movements!</string>
+    <string name="repeat_movements">Repeat the movements!</string>
     <string name="blackButton">black button</string>
 </resources>

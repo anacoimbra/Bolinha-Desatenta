@@ -1,5 +1,6 @@
 package br.android.bolinhadesatenta.app;
 
+import br.android.bolinhadesatenta.app.robot.Game;
 import br.android.bolinhadesatenta.app.util.SystemUiHider;
 
 import android.annotation.TargetApi;
@@ -26,6 +27,8 @@ import com.orbotix.common.Robot;
 import com.orbotix.common.RobotChangedStateListener;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 
 /**
@@ -35,7 +38,7 @@ import java.util.List;
  * @see SystemUiHider
  */
 public class MainActivity extends Activity implements DiscoveryAgentEventListener,
-        RobotChangedStateListener {
+        RobotChangedStateListener, Observer {
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -70,6 +73,10 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
     private ConvenienceRobot _connectedRobot;
 
     private View mDecorView;
+
+    private Game game;
+
+    private int movementsLeft;
 
     ImageButton txtEsq;
 
@@ -141,16 +148,7 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
                     }
                 });
 
-        this.findViewById(R.id.downBtn).setEnabled(false);
-        this.findViewById(R.id.upBtn).setEnabled(false);
-        this.findViewById(R.id.leftBtn).setEnabled(false);
-        this.findViewById(R.id.rightBtn).setEnabled(false);
-        this.findViewById(R.id.pinkBtn).setEnabled(false);
-        this.findViewById(R.id.blueBtn).setEnabled(false);
-        this.findViewById(R.id.orangeBtn).setEnabled(false);
-        this.findViewById(R.id.greenBtn).setEnabled(false);
-        this.findViewById(R.id.blackBtn).setEnabled(false);
-        this.findViewById(R.id.redBtn).setEnabled(false);
+        disableButtons();
 
         // Set up the user interaction to manually show or hide the system UI.
         contentView.setOnClickListener(new View.OnClickListener() {
@@ -164,49 +162,33 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         startDiscovery();
     }
 
-    public void setYellow(View view){
-        try {
-            _connectedRobot.setLed(1f, 0.922f, 0.231f);
-        }catch (Exception e){
-            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
-        }
+    private void enableButtons() {
+        this.findViewById(R.id.downBtn).setEnabled(true);
+        this.findViewById(R.id.upBtn).setEnabled(true);
+        this.findViewById(R.id.leftBtn).setEnabled(true);
+        this.findViewById(R.id.rightBtn).setEnabled(true);
+        this.findViewById(R.id.pinkBtn).setEnabled(true);
+        this.findViewById(R.id.blueBtn).setEnabled(true);
+        this.findViewById(R.id.orangeBtn).setEnabled(true);
+        this.findViewById(R.id.greenBtn).setEnabled(true);
+        this.findViewById(R.id.blackBtn).setEnabled(true);
+        this.findViewById(R.id.redBtn).setEnabled(true);
     }
 
-    public void setPink(View view){
-        try {
-            _connectedRobot.setLed(1f, 0.804f, 0.824f);
-        }catch (Exception e){
-            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
-        }
+
+    private void disableButtons() {
+        this.findViewById(R.id.downBtn).setEnabled(false);
+        this.findViewById(R.id.upBtn).setEnabled(false);
+        this.findViewById(R.id.leftBtn).setEnabled(false);
+        this.findViewById(R.id.rightBtn).setEnabled(false);
+        this.findViewById(R.id.pinkBtn).setEnabled(false);
+        this.findViewById(R.id.blueBtn).setEnabled(false);
+        this.findViewById(R.id.orangeBtn).setEnabled(false);
+        this.findViewById(R.id.greenBtn).setEnabled(false);
+        this.findViewById(R.id.blackBtn).setEnabled(false);
+        this.findViewById(R.id.redBtn).setEnabled(false);
     }
 
-    public void setPurple(View view){
-        try {
-            _connectedRobot.setLed(0.612f, 0.153f, 0.69f);
-        }catch (Exception e){
-            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void setOrange(View view){
-        try {
-            _connectedRobot.setLed(1f, 0.596f, 0f);
-        }catch (Exception e){
-            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void setInitialColor(View view){
-        this.setInitialColor();
-    }
-
-    private void setInitialColor(){
-        try {
-            _connectedRobot.setLed(1f,1f,1f);
-        }catch (Exception e){
-            Toast.makeText(this, "Bolinha não conectada", Toast.LENGTH_LONG).show();
-        }
-    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -278,21 +260,12 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
                 // common functionality related to the individual robots. You can always of course use the
                 // Robot#sendCommand() method, but Ollie#drive() reads a bit better.
                 _connectedRobot = new Sphero(robot);
-                this.findViewById(R.id.downBtn).setEnabled(true);
-                this.findViewById(R.id.upBtn).setEnabled(true);
-                this.findViewById(R.id.leftBtn).setEnabled(true);
-                this.findViewById(R.id.rightBtn).setEnabled(true);
-                this.findViewById(R.id.pinkBtn).setEnabled(true);
-                this.findViewById(R.id.blueBtn).setEnabled(true);
-                this.findViewById(R.id.orangeBtn).setEnabled(true);
-                this.findViewById(R.id.greenBtn).setEnabled(true);
-                this.findViewById(R.id.blackBtn).setEnabled(true);
-                this.findViewById(R.id.redBtn).setEnabled(true);
+
                 Log.d("OK", "Sphero conectado");
 
                 _connectedRobot.setZeroHeading();
 
-                this.setInitialColor();
+                startNewGame();
 
                 break;
             case Disconnected:
@@ -302,6 +275,18 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
                 Log.v("ERRO", "Not handling state change notification: " + robotChangedStateNotificationType);
                 break;
         }
+    }
+
+    private void startNewGame() {
+        Log.d("uhul", "aff");
+        TextView l = (TextView) findViewById(R.id.feedback_message);
+        l.setTextColor(getResources().getColor(R.color.ok));
+        l.setText(R.string.waiting_sphero);
+        game = new Game(_connectedRobot, this, Game.DIFFICULTY_NORMAL, this);
+        game.newTurn();
+        System.out.println("Iniciar jogo");
+        while(game.isActive) {System.out.println("Rodando jogo");} //wait while ball is running
+        enableButtons();
     }
 
     private void startDiscovery() {
@@ -326,4 +311,12 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         }
     }
 
+    public void releaseButtons() {
+
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+        releaseButtons();
+    }
 }
