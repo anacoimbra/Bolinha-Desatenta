@@ -29,7 +29,7 @@ public class Game extends Observable {
 
     public static int DIFFICULTY_NORMAL = 3;
 
-    private static int MAX_COMMANDS;
+    private static int MAX_COMMANDS = 100;
 
     public boolean isActive;
     private ConvenienceRobot _connectedRobot;
@@ -105,7 +105,7 @@ public class Game extends Observable {
         int command;
 
         for ( int i = 1; i < calculateMovements(); i+=1 ) {
-            command = r.nextInt((MAX_COMMANDS * 1000) % MAX_COMMANDS);
+            command = r.nextInt(MAX_COMMANDS);
             executedCommands.add(command);
             if (command == COMMAND_LEFT) {
                 countLeft();
