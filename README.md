@@ -69,5 +69,21 @@ public void handleRobotChangedState(Robot robot, RobotChangedStateNotificationTy
     }
 }
 ```
+###Metodos Sphero
+Implementações dos métodos do SDK Sphero para a interação.
+####Mudança de Cor
+*x,y,z* devem ser substituidos por valores em pontos flutuantes de 0 a 1 para *vermelho, verde e azul* respectivamente
+```
+_connectedRobot.setLed(x,y,y);
+```
+####Movimentação
+*a,b* correspondem, respectivamente, a rotação que a Sphero deve ter em relação a sua calibração feita anteriormente e sua velocidade.
+```
+_connectedRobot.drive(a, b);
+```
+Se não for feito um tratamento, o robô deslocará por uma distância muito longa. Para resolver este problema, utilizamos um método do java *wait(s);* que faz uma espera de s milisegundos e depois paramos a Sphero com o seguinte comando:
+```
+_connectedRobot.stop();
+```
 
 ![ScreenShot](/device-2015-10-05-151431.png)
