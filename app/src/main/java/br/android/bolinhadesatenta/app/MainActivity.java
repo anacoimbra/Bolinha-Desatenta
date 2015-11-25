@@ -280,6 +280,8 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
     private void newTurn() {
         game.newTurn();
         while(game.isActive) {System.out.println("Rodando jogo");} //wait while ball is running
+
+        update(game, _connectedRobot);
     }
 
     private void startNewGame() {

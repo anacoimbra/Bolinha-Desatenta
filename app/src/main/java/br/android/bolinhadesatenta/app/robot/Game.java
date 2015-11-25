@@ -1,6 +1,7 @@
 package br.android.bolinhadesatenta.app.robot;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.orbotix.ConvenienceRobot;
@@ -15,25 +16,25 @@ import java.util.Stack;
  */
 public class Game extends Observable {
 
-    public static int COMMAND_LEFT = 1;
-    public static int COMMAND_RIGHT= 2;
-    public static int COMMAND_UP = 3;
-    public static int COMMAND_DOWN = 4;
+    public static int COMMAND_LEFT = 0;
+    public static int COMMAND_RIGHT= 1;
+    public static int COMMAND_UP = 2;
+    public static int COMMAND_DOWN = 3;
 
-    public static int COMMAND_PINK = 5;
-    public static int COMMAND_YELLOW = 6;
-    public static int COMMAND_BLACK = 7;
-    public static int COMMAND_GREEN = 8;
-    public static int COMMAND_BLUE = 9;
-    public static int COMMAND_RED = 10;
+    public static int COMMAND_PINK = 4;
+    public static int COMMAND_YELLOW = 5;
+    public static int COMMAND_BLACK = 6;
+    public static int COMMAND_GREEN = 7;
+    public static int COMMAND_BLUE = 8;
+    public static int COMMAND_RED = 9;
 
     public static int DIFFICULTY_NORMAL = 3;
 
-    private static int MAX_COMMANDS = 100;
+    private static int MAX_COMMANDS = 9;
 
     public boolean isActive;
     private ConvenienceRobot _connectedRobot;
-    private int turn;
+    private int turn, movementsQuantity;
     private Activity context;
     private Stack<Integer> executedCommands;
     private int difficulty;
@@ -42,6 +43,7 @@ public class Game extends Observable {
         this._connectedRobot = _connectedRobot;
         this.context = context;
         this.turn = 0;
+        this.movementsQuantity = 1;
         this.difficulty = difficulty;
         this.addObserver(observer);
     }
@@ -82,29 +84,45 @@ public class Game extends Observable {
         }
     }
 
-    private void setPurple(){
+    private void setBlack(){
         try {
-            _connectedRobot.setLed(0.612f, 0.153f, 0.69f);
+            _connectedRobot.setLed(0f, 0f, 0f);
         }catch (Exception e){
             Toast.makeText(context, "Sphero not connected", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void setOrange(){
+    private void setRed(){
         try {
-            _connectedRobot.setLed(1f, 0.596f, 0f);
+            _connectedRobot.setLed(1f, 0f, 0f);
         }catch (Exception e){
             Toast.makeText(context, "Sphero not connected", Toast.LENGTH_LONG).show();
         }
     }
 
-    public void newTurn() {
+    private void setBlue(){
+        try {
+            _connectedRobot.setLed(0f, 0f, 1f);
+        }catch (Exception e){
+            Toast.makeText(context, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setGreen(){
+        try {
+            _connectedRobot.setLed(0f, 1f, 0f);
+        }catch (Exception e){
+            Toast.makeText(context, "Sphero not connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public synchronized void newTurn() {
         executedCommands = new Stack<Integer>();
         setActive();
         Random r = new Random();
         int command;
 
-        for ( int i = 1; i < calculateMovements(); i+=1 ) {
+        for ( int i = 0; i < movementsQuantity; i+=1 ) {
             command = r.nextInt(MAX_COMMANDS);
             executedCommands.add(command);
             if (command == COMMAND_LEFT) {
@@ -137,8 +155,13 @@ public class Game extends Observable {
             else if (command == COMMAND_RED) {
                 countRed();
             }
-        }
 
+            try {
+                wait(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         this.setInactive();
     }
@@ -185,22 +208,75 @@ public class Game extends Observable {
     }
 
     private void paintPink() {
+        setPink();
 
+        try {
+            wait(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        setInitialColor();
     }
+
     private void paintYellow() {
+        setYellow();
 
+        try {
+            wait(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        setInitialColor();
     }
+
     private void paintBlack() {
+        setBlack();
 
+        try {
+            wait(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        setInitialColor();
     }
+
     private void paintGreen() {
+        setGreen();
 
+        try {
+            wait(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        setInitialColor();
     }
+
     private void paintBlue() {
+        setBlue();
 
+        try {
+            wait(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        setInitialColor();
     }
-    private void paintRed() {
 
+    private void paintRed() {
+        setRed();
+
+        try {
+            wait(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        setInitialColor();
     }
 
     public void moveUp(){
@@ -209,6 +285,7 @@ public class Game extends Observable {
             try {
                 wait(500);
             } catch (Exception ignore) {
+                Log.e("Erro Sphero", ignore.getMessage());
             }
             _connectedRobot.stop();
         }catch (Exception e){
@@ -221,7 +298,9 @@ public class Game extends Observable {
             _connectedRobot.drive(90, 2);
             try {
                 wait(500);
-            }catch (Exception ignore){}
+            }catch (Exception ignore){
+                Log.e("Erro Sphero", ignore.getMessage());
+            }
             _connectedRobot.stop();
         }catch (Exception e){
             Toast.makeText(context, "Sphero not connected", Toast.LENGTH_LONG).show();
@@ -234,6 +313,7 @@ public class Game extends Observable {
             try {
                 wait(500);
             } catch (Exception ignore) {
+                Log.e("Erro Sphero", ignore.getMessage());
             }
             _connectedRobot.stop();
         }catch (Exception e){
@@ -247,6 +327,7 @@ public class Game extends Observable {
             try {
                 wait(500);
             } catch (Exception ignore) {
+                Log.e("Erro Sphero", ignore.getMessage());
             }
             _connectedRobot.stop();
         }catch (Exception e){
