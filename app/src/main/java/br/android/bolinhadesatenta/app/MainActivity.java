@@ -276,6 +276,8 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
     }
 
     private void newTurn() {
+        // TODO resetar label com mensagem apropriada. depois dos comandos executados, trocar label novamente
+        disableButtons(); // lock buttons
         setInitialColor();
         game.newTurn();
         ArrayList<Integer> commands = game.getExecutedCommands();
@@ -299,29 +301,31 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
             }
             else if (command == Game.COMMAND_PINK) {
                 game.addUserCommand(Game.COMMAND_PINK);
-                // set sphero led
+                // TODO set sphero led
             }
             else if (command == Game.COMMAND_YELLOW) {
                 game.addUserCommand(Game.COMMAND_YELLOW);
-                // set sphero led
+                // TODO set sphero led
             }
             else if (command == Game.COMMAND_BLACK) {
                 game.addUserCommand(Game.COMMAND_BLACK);
-                // set sphero led
+                // TODO set sphero led
             }
             else if (command == Game.COMMAND_GREEN) {
                 game.addUserCommand(Game.COMMAND_GREEN);
-                // set sphero led
+                // TODO set sphero led
             }
             else if (command == Game.COMMAND_BLUE) {
                 game.addUserCommand(Game.COMMAND_BLUE);
-                // set sphero led
+                // TODO set sphero led
             }
             else if (command == Game.COMMAND_RED) {
                 game.addUserCommand(Game.COMMAND_RED);
-                // set sphero led
+                // TODO set sphero led
             }
         }
+
+        enableButtons(); // unlock buttons
     }
 
     private void startNewGame() {
@@ -354,15 +358,10 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         }
     }
 
-    private void releaseButtons() {
-        enableButtons();
-    }
-
     @Override
     public void update(Observable observable, Object data) {
-        disableButtons();
-        TextView l = (TextView) findViewById(R.id.feedback_message);
-        l.setText(R.string.repeat_movements);
+        // TODO recebe pontuação no object data e acrescenta no label de pontuação
+        newTurn();
     }
 
     public void moveUp(){
