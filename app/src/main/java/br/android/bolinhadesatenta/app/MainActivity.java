@@ -276,6 +276,7 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
     }
 
     private void newTurn() {
+        setInitialColor();
         game.newTurn();
         ArrayList<Integer> commands = game.getExecutedCommands();
 
