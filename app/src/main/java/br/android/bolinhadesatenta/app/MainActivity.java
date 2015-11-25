@@ -244,30 +244,30 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
     }
 
     private void enableButtons() {
-        this.findViewById(R.id.downBtn).setEnabled(true);
-        this.findViewById(R.id.upBtn).setEnabled(true);
-        this.findViewById(R.id.leftBtn).setEnabled(true);
-        this.findViewById(R.id.rightBtn).setEnabled(true);
-        this.findViewById(R.id.pinkBtn).setEnabled(true);
-        this.findViewById(R.id.blueBtn).setEnabled(true);
-        this.findViewById(R.id.orangeBtn).setEnabled(true);
-        this.findViewById(R.id.greenBtn).setEnabled(true);
-        this.findViewById(R.id.blackBtn).setEnabled(true);
-        this.findViewById(R.id.redBtn).setEnabled(true);
+        down.setEnabled(true);
+        up.setEnabled(true);
+        left.setEnabled(true);
+        right.setEnabled(true);
+        pink.setEnabled(true);
+        blue.setEnabled(true);
+        orange.setEnabled(true);
+        green.setEnabled(true);
+        black.setEnabled(true);
+        red.setEnabled(true);
     }
 
 
     private void disableButtons() {
-        this.findViewById(R.id.downBtn).setEnabled(false);
-        this.findViewById(R.id.upBtn).setEnabled(false);
-        this.findViewById(R.id.leftBtn).setEnabled(false);
-        this.findViewById(R.id.rightBtn).setEnabled(false);
-        this.findViewById(R.id.pinkBtn).setEnabled(false);
-        this.findViewById(R.id.blueBtn).setEnabled(false);
-        this.findViewById(R.id.orangeBtn).setEnabled(false);
-        this.findViewById(R.id.greenBtn).setEnabled(false);
-        this.findViewById(R.id.blackBtn).setEnabled(false);
-        this.findViewById(R.id.redBtn).setEnabled(false);
+        down.setEnabled(false);
+        up.setEnabled(false);
+        left.setEnabled(false);
+        right.setEnabled(false);
+        pink.setEnabled(false);
+        blue.setEnabled(false);
+        orange.setEnabled(false);
+        green.setEnabled(false);
+        black.setEnabled(false);
+        red.setEnabled(false);
     }
 
 
