@@ -34,7 +34,7 @@ public class Game extends Observable {
 
     public boolean isActive;
     private ConvenienceRobot _connectedRobot;
-    private int turn, movementsQuantity;
+    private int turn;
     private Activity context;
     private Stack<Integer> executedCommands;
     private int difficulty;
@@ -43,7 +43,6 @@ public class Game extends Observable {
         this._connectedRobot = _connectedRobot;
         this.context = context;
         this.turn = 0;
-        this.movementsQuantity = 1;
         this.difficulty = difficulty;
         this.addObserver(observer);
     }
@@ -122,7 +121,7 @@ public class Game extends Observable {
         Random r = new Random();
         int command;
 
-        for ( int i = 0; i < movementsQuantity; i+=1 ) {
+        for ( int i = 0; i < calculateMovements(); i+=1 ) {
             command = r.nextInt(MAX_COMMANDS);
             executedCommands.add(command);
             if (command == COMMAND_LEFT) {
@@ -333,10 +332,5 @@ public class Game extends Observable {
         }catch (Exception e){
             Toast.makeText(context, "Sphero not connected", Toast.LENGTH_LONG).show();
         }
-    }
-
-    public boolean verifyCommand(int i, int command)
-    {
-        return (executedCommands.get(i) == command);
     }
 }

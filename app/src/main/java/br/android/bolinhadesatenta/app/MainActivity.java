@@ -78,8 +78,6 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
 
     private ImageButton up, down, right, left, black, pink, blue, green, red, orange;
 
-    private int movementsLeft;
-
     ImageButton txtEsq;
 
     // This snippet hides the system bars.
@@ -122,100 +120,70 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(game.verifyCommand(0, 2))
-                {
-                    Log.e("ACERTOU", "");
-                }
+
             }
         });
 
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(game.verifyCommand(0, 3))
-                {
-                    Log.e("ACERTOU", "");
-                }
+
             }
         });
 
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(game.verifyCommand(0, 1))
-                {
-                    Log.e("ACERTOU", "");
-                }
+
             }
         });
 
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(game.verifyCommand(0, 0))
-                {
-                    Log.e("ACERTOU", "");
-                }
+
             }
         });
 
         pink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(game.verifyCommand(0, 4))
-                {
-                    Log.e("ACERTOU", "");
-                }
+
             }
         });
 
         orange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(game.verifyCommand(0, 5))
-                {
-                    Log.e("ACERTOU", "");
-                }
+
             }
         });
 
         black.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(game.verifyCommand(0, 6))
-                {
-                    Log.e("ACERTOU", "");
-                }
+
             }
         });
 
         green.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(game.verifyCommand(0, 7))
-                {
-                    Log.e("ACERTOU", "");
-                }
+
             }
         });
 
         blue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(game.verifyCommand(0, 8))
-                {
-                    Log.e("ACERTOU", "");
-                }
+
             }
         });
 
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(game.verifyCommand(0, 9))
-                {
-                    Log.e("ACERTOU", "");
-                }
+
             }
         });
 
