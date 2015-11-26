@@ -77,6 +77,8 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
 
     private ImageButton up, down, right, left, black, pink, blue, green, red, orange;
 
+    private static int INITIAL_SCORE = 0;
+
     // This snippet hides the system bars.
     private void hideSystemUI() {
         // Set the IMMERSIVE flag.
@@ -190,38 +192,11 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         mSystemUiHider
                 .setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
                     // Cached values.
-                    int mControlsHeight;
-                    int mShortAnimTime;
 
                     @Override
                     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
                     public void onVisibilityChange(boolean visible) {
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-//                            // If the ViewPropertyAnimator API is available
-//                            // (Honeycomb MR2 and later), use it to animate the
-//                            // in-layout UI controls at the bottom of the
-//                            // screen.
-//                            if (mControlsHeight == 0) {
-//                                mControlsHeight = controlsView.getHeight();
-//                            }
-//                            if (mShortAnimTime == 0) {
-//                                mShortAnimTime = getResources().getInteger(
-//                                        android.R.integer.config_shortAnimTime);
-//                            }
-//                            controlsView.animate()
-//                                    .translationY(visible ? 0 : mControlsHeight)
-//                                    .setDuration(mShortAnimTime);
-//                        } else {
-//                            // If the ViewPropertyAnimator APIs aren't
-//                            // available, simply show or hide the in-layout UI
-//                            // controls.
-//                            controlsView.setVisibility(View.GONE);
-//                        }
-//
-//                        if (visible) {
-//                            // Schedule a hide().
-//                            delayedHide(AUTO_HIDE_DELAY_MILLIS);
-//                        }
+
                     }
                 });
 
@@ -354,13 +329,13 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         }
     }
 
-    private void newTurn() {
+    private synchronized void newTurn() {
         // TODO resetar label com mensagem apropriada. depois dos comandos executados, trocar label novamente
         disableButtons(); // lock buttons
         setInitialColor();
         game.newTurn();
 
-        ArrayList<Integer> commands = game.getExecutedCommands();
+        ArrayList<Integer> commands = game.getExecution();
 
         for (Integer command : commands) {
             if (command == Game.COMMAND_LEFT) {
@@ -381,27 +356,33 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
             }
             else if (command == Game.COMMAND_PINK) {
                 game.addUserCommand(Game.COMMAND_PINK);
-                // TODO set sphero led
+                setPink();
             }
-            else if (command == Game.COMMAND_YELLOW) {
-                game.addUserCommand(Game.COMMAND_YELLOW);
-                // TODO set sphero led
+            else if (command == Game.COMMAND_ORANGE) {
+                game.addUserCommand(Game.COMMAND_ORANGE);
+                setOrange();
             }
             else if (command == Game.COMMAND_BLACK) {
                 game.addUserCommand(Game.COMMAND_BLACK);
-                // TODO set sphero led
+                setBlack();
             }
             else if (command == Game.COMMAND_GREEN) {
                 game.addUserCommand(Game.COMMAND_GREEN);
-                // TODO set sphero led
+                setGreen();
             }
             else if (command == Game.COMMAND_BLUE) {
                 game.addUserCommand(Game.COMMAND_BLUE);
-                // TODO set sphero led
+                setBlue();
             }
             else if (command == Game.COMMAND_RED) {
                 game.addUserCommand(Game.COMMAND_RED);
-                // TODO set sphero led
+                setRed();
+            }
+
+            try {
+                wait(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
 
@@ -409,9 +390,11 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
     }
 
     private void startNewGame() {
+        TextView scoreTextView = (TextView) findViewById(R.id.scoreLbl);
         TextView l = (TextView) findViewById(R.id.feedback_message);
         l.setTextColor(getResources().getColor(R.color.ok));
         l.setText(R.string.waiting_sphero);
+        scoreTextView.setText(INITIAL_SCORE);
         game = new Game(Game.DIFFICULTY_NORMAL, this);
         newTurn();
     }
@@ -440,8 +423,16 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
 
     @Override
     public void update(Observable observable, Object data) {
-        // TODO recebe pontuação no object data e acrescenta no label de pontuação
-        newTurn();
+        TextView scoreTextView = (TextView) findViewById(R.id.scoreLbl);
+        int score = (Integer) data;
+
+
+        if ( score != 0 ) {
+            scoreTextView.setText(Integer.parseInt(scoreTextView.getText().toString()) + score);
+            newTurn();
+        } else {
+            startNewGame();
+        }
     }
 
     public void moveUp(){
