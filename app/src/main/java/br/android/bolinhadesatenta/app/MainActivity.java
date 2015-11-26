@@ -386,6 +386,12 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
             }
         }
 
+        try {
+            wait(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         enableButtons(); // unlock buttons
     }
 
