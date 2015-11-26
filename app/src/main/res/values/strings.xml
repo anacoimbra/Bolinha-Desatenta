@@ -7,4 +7,5 @@
     <string name="waiting_sphero">Watch carefully the movements!</string>
     <string name="repeat_movements">Repeat the movements!</string>
     <string name="blackButton">black button</string>
+    <string name="inicial_score">0</string>
 </resources>

@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="0"
-                    android:id="@+id/textView"
+                    android:id="@+id/scoreLbl"
                     android:textAlignment="textEnd"
                     android:textColor="@color/normal_text" />
 

@@ -1,5 +1,7 @@
 package br.android.bolinhadesatenta.app.robot;
 
+import android.util.Log;
+
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
@@ -52,36 +54,6 @@ public class Game extends Observable {
         for ( int i = 0; i < calculateMovements(); i+=1 ) {
             command = r.nextInt(MAX_COMMANDS);
             execution.add(command);
-            if (command == COMMAND_LEFT) {
-                execution.add(COMMAND_LEFT);
-            }
-            else if (command == COMMAND_RIGHT) {
-                execution.add(COMMAND_RIGHT);
-            }
-            else if (command == COMMAND_UP) {
-                execution.add(COMMAND_UP);
-            }
-            else if (command == COMMAND_DOWN) {
-                execution.add(COMMAND_DOWN);
-            }
-            else if (command == COMMAND_PINK) {
-                execution.add(COMMAND_PINK);
-            }
-            else if (command == COMMAND_ORANGE) {
-                execution.add(COMMAND_ORANGE);;
-            }
-            else if (command == COMMAND_BLACK) {
-                execution.add(COMMAND_BLACK);
-            }
-            else if (command == COMMAND_GREEN) {
-                execution.add(COMMAND_GREEN);
-            }
-            else if (command == COMMAND_BLUE) {
-                execution.add(COMMAND_BLUE);
-            }
-            else if (command == COMMAND_RED) {
-                execution.add(COMMAND_RED);
-            }
         }
     }
 
@@ -96,6 +68,7 @@ public class Game extends Observable {
     private void checkScore() {
         int correct = 0,
             score = 0;
+        Log.d("Game",execution.size() + "-" + executedCommands.size());
         for( int i = 0; i < execution.size(); i+=1) {
             if ( execution.get(i) == executedCommands.get(i) ) {
                 correct+=1;
@@ -105,6 +78,9 @@ public class Game extends Observable {
         if ( correct/ execution.size() > 1-(MAX_DIFFICULTY-difficulty)/10 ) {
             score = correct * 10;
         }
+
+        Log.d("Game", String.valueOf(score));
+        setChanged();
         notifyObservers(score);
     }
 

@@ -118,70 +118,70 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                game.addUserCommand(Game.COMMAND_UP);
             }
         });
 
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                game.addUserCommand(Game.COMMAND_DOWN);
             }
         });
 
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                game.addUserCommand(Game.COMMAND_RIGHT);
             }
         });
 
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                game.addUserCommand(Game.COMMAND_LEFT);
             }
         });
 
         pink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                game.addUserCommand(Game.COMMAND_PINK);
             }
         });
 
         orange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                game.addUserCommand(Game.COMMAND_ORANGE);
             }
         });
 
         black.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                game.addUserCommand(Game.COMMAND_BLACK);
             }
         });
 
         green.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                game.addUserCommand(Game.COMMAND_GREEN);
             }
         });
 
         blue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                game.addUserCommand(Game.COMMAND_BLUE);
             }
         });
 
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                game.addUserCommand(Game.COMMAND_RED);
             }
         });
 
@@ -339,43 +339,33 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
 
         for (Integer command : commands) {
             if (command == Game.COMMAND_LEFT) {
-                game.addUserCommand(Game.COMMAND_LEFT);
                 moveLeft();
             }
             else if (command == Game.COMMAND_RIGHT) {
-                game.addUserCommand(Game.COMMAND_RIGHT);
                 moveRight();
             }
             else if (command == Game.COMMAND_UP) {
-                game.addUserCommand(Game.COMMAND_UP);
                 moveUp();
             }
             else if (command == Game.COMMAND_DOWN) {
-                game.addUserCommand(Game.COMMAND_DOWN);
                 moveDown();
             }
             else if (command == Game.COMMAND_PINK) {
-                game.addUserCommand(Game.COMMAND_PINK);
                 setPink();
             }
             else if (command == Game.COMMAND_ORANGE) {
-                game.addUserCommand(Game.COMMAND_ORANGE);
                 setOrange();
             }
             else if (command == Game.COMMAND_BLACK) {
-                game.addUserCommand(Game.COMMAND_BLACK);
                 setBlack();
             }
             else if (command == Game.COMMAND_GREEN) {
-                game.addUserCommand(Game.COMMAND_GREEN);
                 setGreen();
             }
             else if (command == Game.COMMAND_BLUE) {
-                game.addUserCommand(Game.COMMAND_BLUE);
                 setBlue();
             }
             else if (command == Game.COMMAND_RED) {
-                game.addUserCommand(Game.COMMAND_RED);
                 setRed();
             }
 
@@ -400,7 +390,7 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
         TextView l = (TextView) findViewById(R.id.feedback_message);
         l.setTextColor(getResources().getColor(R.color.ok));
         l.setText(R.string.waiting_sphero);
-        scoreTextView.setText(INITIAL_SCORE);
+        scoreTextView.setText(R.string.inicial_score);
         game = new Game(Game.DIFFICULTY_NORMAL, this);
         newTurn();
     }
@@ -429,6 +419,7 @@ public class MainActivity extends Activity implements DiscoveryAgentEventListene
 
     @Override
     public void update(Observable observable, Object data) {
+        Log.d("TESTE", data.toString());
         TextView scoreTextView = (TextView) findViewById(R.id.scoreLbl);
         int score = (Integer) data;
 
